@@ -12,25 +12,29 @@ on:
                 required: true
                 default: 'Jobflow'
                 options: ['Jobflow', 'Original']
-            # test-case:
-            #     description: 'Test Case Name'
-            #     required: true
-            #     default: 'test-case-1'
-            #     options: ['test-case-1', 'test-case-2', 'test-case-3']
+            tests:
+                type: choice
+                description: 'Tests to run'
+                required: true
+                default: 'all'
+                options: ['All', 'Postgres', 'Sql Server', 'MySQL']
 
 env:
     MODE: ${{ github.event.inputs.mode || 'Jobflow' }}
+    TESTS: ${{ github.event.inputs.tests || 'All' }}
 
 jobs:
     performance_tests:
         runs-on: ubuntu-22.04
         name: Run Performance Tests
         steps:
-            - name: Print Variables
+            - name: Print all inputs
               run: |
-                echo "${{ toJSON(github.event.inputs) }}"
-                echo "Mode: ${{ github.event.inputs.mode }}"
+                echo "${{ toJSON(github.event.inputs)}}"
+            - name: ENV Variables
+              run: |
                 echo "MODE: $MODE"
+                echo "TESTS: $TESTS"
                 echo "COMMIT: $GITHUB_SHA"
             # - name: Checkout
             #   uses: actions/checkout@v3
