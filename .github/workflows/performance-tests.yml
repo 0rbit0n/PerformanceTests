@@ -1,9 +1,9 @@
-name: Performance Tests
+name: pipeline
 
 on:
     push:
         branches:
-            - brbr
+            - brb
     workflow_dispatch:
         inputs:
             mo:
