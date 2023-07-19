@@ -6,15 +6,9 @@ on:
             - main
     workflow_dispatch:
         inputs:
-            mode:
-                type: choice
-                description: 'Mode'
-                required: true
-                default: 'Jobflow'
-                options: ['Jobflow', 'Original']
             jobflow-enabled:
                 type: boolean
-                description: Jobflow mode
+                description: Jobflow
                 default: true
             tests:
                 type: choice
@@ -24,7 +18,6 @@ on:
                 options: ['All', 'Postgres', 'Sql Server', 'MySQL']
 
 env:
-    MODE: ${{ github.event.inputs.mode || 'Jobflow' }}
     TESTS: ${{ github.event.inputs.tests || 'All' }}
     JOBFLOW_ENABLED: ${{ github.event.inputs.jobflow-enabled || true }}
 
@@ -38,10 +31,9 @@ jobs:
                 echo "${{ toJSON(github.event.inputs)}}"
             - name: ENV Variables
               run: |
-                echo "MODE: $MODE"
+                echo "JOBFLOW_ENABLED: $JOBFLOW_ENABLED"
                 echo "TESTS: $TESTS"
                 echo "COMMIT: $GITHUB_SHA"
-                echo "JOBFLOW_ENABLED: $JOBFLOW_ENABLED"
             # - name: Checkout
             #   uses: actions/checkout@v3
             #   with:
