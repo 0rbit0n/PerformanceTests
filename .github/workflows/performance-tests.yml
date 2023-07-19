@@ -3,10 +3,10 @@ name: pipeline
 on:
     push:
         branches:
-            - brb
+            - main
     workflow_dispatch:
         inputs:
-            mo:
+            mode:
                 type: choice
                 description: 'Mode'
                 required: true
@@ -18,11 +18,6 @@ on:
             #     default: 'test-case-1'
             #     options: ['test-case-1', 'test-case-2', 'test-case-3']
 
-# env:
-#     jobflow-enabled: ${{ github.event.inputs.jobflow-enabled }}
-#     branch-or-tag: ${{ github.event.inputs.branch-or-tag }}
-#     test-case: ${{ github.event.inputs.test-case }}
-
 jobs:
     performance_tests:
         runs-on: ubuntu-22.04
@@ -31,7 +26,8 @@ jobs:
             - name: Print Variables
               run: |
                 echo "${{ toJSON(github.event.inputs) }}"
-                echo "Mode: ${{ github.event.inputs.mo }}"
+                echo "Mode: ${{ github.event.inputs.mode }}"
+                echo "Mode(simple): $github.event.inputs.mode"
                 echo "Commit: $GITHUB_SHA"
             # - name: Checkout
             #   uses: actions/checkout@v3
