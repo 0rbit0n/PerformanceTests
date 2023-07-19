@@ -18,6 +18,9 @@ on:
             #     default: 'test-case-1'
             #     options: ['test-case-1', 'test-case-2', 'test-case-3']
 
+env:
+    MODE: ${{ github.event.inputs.mode || 'Jobflow' }}
+
 jobs:
     performance_tests:
         runs-on: ubuntu-22.04
@@ -27,7 +30,8 @@ jobs:
               run: |
                 echo "${{ toJSON(github.event.inputs) }}"
                 echo "Mode: ${{ github.event.inputs.mode }}"
-                echo "Commit: $GITHUB_SHA"
+                echo "MODE: $MODE"
+                echo "COMMIT: $GITHUB_SHA"
             # - name: Checkout
             #   uses: actions/checkout@v3
             #   with:
