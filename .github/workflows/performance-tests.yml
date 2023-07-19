@@ -27,7 +27,6 @@ jobs:
               run: |
                 echo "${{ toJSON(github.event.inputs) }}"
                 echo "Mode: ${{ github.event.inputs.mode }}"
-                echo "Mode(simple): $github.event.inputs.mode"
                 echo "Commit: $GITHUB_SHA"
             # - name: Checkout
             #   uses: actions/checkout@v3
