@@ -6,7 +6,7 @@ on:
             - brbr
     workflow_dispatch:
         inputs:
-            mode:
+            mo:
                 type: choice
                 description: 'Mode'
                 required: true
@@ -31,7 +31,7 @@ jobs:
             - name: Print Variables
               run: |
                 echo "${{ toJSON(github.event.inputs) }}"
-                echo "Mode: $github.event.inputs.mode"
+                echo "Mode: ${{ github.event.inputs.mo }}"
                 echo "Commit: $GITHUB_SHA"
             # - name: Checkout
             #   uses: actions/checkout@v3
