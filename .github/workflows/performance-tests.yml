@@ -12,7 +12,7 @@ on:
                 default: true
             tests:
                 type: choice
-                description: 'Tests to run'
+                description: 'Tests'
                 required: true
                 default: 'all'
                 options: ['All', 'Postgres', 'Sql Server', 'MySQL']
@@ -34,10 +34,10 @@ jobs:
                 echo "JOBFLOW_ENABLED: $JOBFLOW_ENABLED"
                 echo "TESTS: $TESTS"
                 echo "COMMIT: $GITHUB_SHA"
-            # - name: Checkout
-            #   uses: actions/checkout@v3
-            #   with:
-            #     fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
             # - name: Setup Dotnet
             #   uses: actions/setup-dotnet@v3
             #   env:
