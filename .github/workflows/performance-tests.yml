@@ -12,6 +12,10 @@ on:
                 required: true
                 default: 'Jobflow'
                 options: ['Jobflow', 'Original']
+            jobflow-enabled:
+                type: boolean
+                description: Jobflow mode
+                default: true
             tests:
                 type: choice
                 description: 'Tests to run'
@@ -22,6 +26,7 @@ on:
 env:
     MODE: ${{ github.event.inputs.mode || 'Jobflow' }}
     TESTS: ${{ github.event.inputs.tests || 'All' }}
+    JOBFLOW_ENABLED: ${{ github.event.inputs.jobflow-enabled || true }}
 
 jobs:
     performance_tests:
@@ -36,6 +41,7 @@ jobs:
                 echo "MODE: $MODE"
                 echo "TESTS: $TESTS"
                 echo "COMMIT: $GITHUB_SHA"
+                echo "JOBFLOW_ENABLED: $JOBFLOW_ENABLED"
             # - name: Checkout
             #   uses: actions/checkout@v3
             #   with:
